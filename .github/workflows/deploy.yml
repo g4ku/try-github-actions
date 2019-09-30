@@ -8,37 +8,20 @@ on:
       - "!*"
 
 jobs:
-  setup:
+  build-and-deploy:
     runs-on: ubuntu-18.04
     steps:
     - uses: actions/checkout@master
-
     - name: setup node
       uses: actions/setup-node@v1
       with:
         node-version: '10.16'
-
     - name: install
       run: npm install
-
-  build:
-    runs-on: ubuntu-18.04
-    needs: setup
-    steps:
-    - name: build
-      run: npm run build
-
-  test:
-    runs-on: ubuntu-18.04
-    needs: setup
-    steps:
     - name: test
       run: npm test
-
-  deploy:
-    runs-on: ubuntu-18.04
-    needs: [build, test]
-    steps:
+    - name: build
+      run: npm run build
     - name: publish
       uses: "netlify/actions/cli@master"
       with:
