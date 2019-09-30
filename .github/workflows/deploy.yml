@@ -41,7 +41,8 @@ jobs:
     steps:
     - name: publish
       uses: "netlify/actions/cli@master"
-      args: "deploy --dir=build --prod"
+      with:
+        args: "deploy --dir=build --prod"
       env:
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
         NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
